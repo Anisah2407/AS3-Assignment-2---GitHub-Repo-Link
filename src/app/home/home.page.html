@@ -1,20 +1,70 @@
+<ion-menu side="start" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <!-- Add navigation links or any other content for the sidebar -->
+      <ion-item routerLink="/about">About</ion-item>
+      <!-- Add more menu items as needed -->
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-buttons slot="start">
+      <!-- Add a button to toggle the sidebar -->
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-item lines="none">
+      <ion-label style="font-weight: 800;font-size: 3em;">
+        Today
+        <p style="font-weight: 400;color: #433465 ;">{{today | date:'fullDate'}}</p>
+      </ion-label>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" id="main-content">
+  
+<ion-searchbar></ion-searchbar>
+    
+  <ion-card *ngFor="let item of todoList; let i = index"  class="ion-margin">
+    <ion-card-header>
+     
+      <ion-item>
+        <ion-icon *ngIf="item.itemPriority === 'High'" color="danger" size="small" name="ellipse"></ion-icon>
+        <ion-icon *ngIf="item.itemPriority === 'Middle'" color="warning" size="small" name="ellipse"></ion-icon>
+        <ion-icon *ngIf="item.itemPriority === 'Low'" color="success" size="small" name="ellipse"></ion-icon>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+        <ion-label>{{item.itemName}}</ion-label>
+      </ion-item>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-label>Due {{item.itemDueDate | date:'fullDate'}}</ion-label>
+    </ion-card-content>
+
+<ion-row>
+
+  <!-- <ion-item>
+    <ion-icon name="checkmark-outline"></ion-icon>
+    <p>Complete</p>
+  </ion-item> -->
+
+  <ion-item button (click)="delete(i)">
+    <ion-icon name="trash-outline"></ion-icon>
+    <p>Cancel</p>
+  </ion-item>
+</ion-row>
+</ion-card>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="addTask()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
 </ion-content>
