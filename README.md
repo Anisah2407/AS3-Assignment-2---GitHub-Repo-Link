@@ -14,7 +14,7 @@ DailyPlanner is a mobile application built with Ionic Framework for managing dai
 1. Clone the repository:
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Anisah2407/AS3-Assignment-2---GitHub-Repo-Link.git
 
 2. Navigate to the project directory:cd DailyPlannerApp
 
